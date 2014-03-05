@@ -33,7 +33,6 @@ public class Main extends JavaPlugin implements Listener {
 		help.add("/spawn: Teleport to spawn");
 		getConfig().set("help", help);
 		saveConfig();
-		getLogger().info("The plugin has started!");
 	}
 
 	@Override
@@ -70,7 +69,7 @@ public class Main extends JavaPlugin implements Listener {
 		if (sender instanceof Player) {
 			if (label.equalsIgnoreCase("help")) {
 				sendHelp(player);
-			} else if (label.equalsIgnoreCase("version")) {
+			} else if (label.equalsIgnoreCase("sversion")) {
 				PluginDescriptionFile pdfFile = this.getDescription();
 				String version = pdfFile.getVersion();
 				player.sendMessage(ChatColor.RED + "This server is currently at v" + version + "!");

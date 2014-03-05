@@ -1,0 +1,9 @@
+name: Test
+main: dev.elitegame.egdmc.Main
+version: 0.1
+commands:
+    help:
+        description: Displays this message
+    sversion:
+        description: Tells the version
+    

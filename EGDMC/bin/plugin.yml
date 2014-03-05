@@ -1,6 +1,8 @@
-name: Test
+name: EGDMC Main
+version: BETA 0.1
 main: dev.elitegame.egdmc.Main
-version: 0.1
 commands:
     help:
-        description: Testing
+        description: Displays help
+    version
+        description: Displays version
