@@ -1,0 +1,55 @@
+package dev.elitegame.egdmc;
+
+import java.util.List;
+
+import org.bukkit.Location;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin {
+	
+	@Override
+	public void onEnable() {
+		saveDefaultConfig();
+		getLogger().info("Welcome to EliteGameDevMC!");
+		getLogger().info("This plugin handles everything in this server.");
+		getLogger().info("If removed, the server will not work.");
+		List<String> help = getConfig().getStringList("help");
+		help.add("/help: Displays this message");
+		help.add("/spawn: Teleport to spawn");
+		getConfig().set("help", help);
+		saveConfig();
+	}
+	@Override
+	public void onDisable() {
+		saveDefaultConfig();
+		getLogger().info("Server now shutting down.");
+	}
+	
+	@Override
+	public boolean onCommand(CommandSender sender, Command command,
+			String label, String[] args) {
+		Player player = (Player) sender;
+		if (sender instanceof Player) {
+			if (label.equalsIgnoreCase("help")) {
+				sendHelp(player);
+			} else if(label.equalsIgnoreCase("spawn")){
+				Location spawn = getConfig
+				player.teleport(spawn);
+			}
+		} else {
+			sender.sendMessage("You must be a player to use this command!");
+		}
+		return true;
+	}
+	
+	public void sendHelp(Player plr) {
+		List<String> help = getConfig().getStringList("help");
+		for (String s : help) {
+			plr.sendMessage(s);
+		}
+	}
+	
+}

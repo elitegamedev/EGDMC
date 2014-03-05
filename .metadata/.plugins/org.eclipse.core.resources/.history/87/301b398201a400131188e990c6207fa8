@@ -1,0 +1,92 @@
+package dev.elitegame.egdmc;
+
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin implements Listener {
+
+	@Override
+	public void onEnable() {
+		getServer().getPluginManager().registerEvents(this, this);
+		saveDefaultConfig();
+		getLogger().info("Welcome to EliteGameDevMC!");
+		getLogger().info("This plugin handles everything in this server.");
+		getLogger().info("If removed, the server will not work.");
+		List<String> help = getConfig().getStringList("help");
+		help.add("/yes: Yes!");
+		getConfig().set("help", help);
+		saveConfig();
+		help.removeAll(help);
+		getConfig().set("help", help);
+		saveConfig();
+		help.add("/help: Displays this message");
+		help.add("/spawn: Teleport to spawn");
+		getConfig().set("help", help);
+		saveConfig();
+	}
+
+	@Override
+	public void onDisable() {
+		saveDefaultConfig();
+		getLogger().info("Server now shutting down.");
+	}
+
+	@EventHandler
+	public void onPlayerToggleFlight(PlayerToggleFlightEvent event) {
+		Player player = event.getPlayer();
+		if (player.getGameMode() == GameMode.CREATIVE) {
+			return;
+		}
+		event.setCancelled(true);
+		player.setAllowFlight(false);
+		player.setFlying(false);
+		player.setVelocity(player.getLocation().getDirection().multiply(1.5).setY(1));
+	}
+	
+	@EventHandler
+	public void onPlayerMove(PlayerMoveEvent event) {
+		Player player = event.getPlayer();
+		if ((player.getGameMode()!=GameMode.CREATIVE)&&(player.getLocation().subtract(0, 1, 0).getBlock().getType()!=Material.AIR)&&(!player.isFlying())) {
+			player.setAllowFlight(true);
+		}
+			
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command command,
+			String label, String[] args) {
+		Player player = (Player) sender;
+		if (sender instanceof Player) {
+			if (label.equalsIgnoreCase("help")) {
+				sendHelp(player);
+			} else if (label.equalsIgnoreCase("version")) {
+				PluginDescriptionFile pdfFile = this.getDescription();
+				String version = pdfFile.getVersion();
+				player.sendMessage(ChatColor.RED + "This server is currently at v" + version + "!");
+			}
+		} else {
+			sender.sendMessage("You must be a player to use this command!");
+		}
+		return true;
+	}
+
+	public void sendHelp(Player plr) {
+		List<String> help = getConfig().getStringList("help");
+		for (String s : help) {
+			plr.sendMessage(s);
+		}
+	}
+
+}

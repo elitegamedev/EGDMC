@@ -1,0 +1,34 @@
+package dev.elitegame.egdmc;
+
+import java.util.List;
+
+import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
+
+public class Main extends JavaPlugin {
+	
+	@Override
+	public void onEnable() {
+		getLogger().info("Welcome to EliteGameDevMC!");
+		getLogger().info("This plugin handles everything in this server.");
+		getLogger().info("If removed, the server will not work.");
+	}
+	@Override
+	public void onDisable() {
+		getLogger().info("Server now shutting down.");
+	}
+	
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command command,
+			String alias, String[] args) {
+		Player player = (Player) sender;
+		if (player.isOp()) {
+			player.sendMessage(ChatColor.RED + "");
+		}
+		return super.onTabComplete(sender, command, alias, args);
+	}
+	
+}

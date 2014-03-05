@@ -1,0 +1,6 @@
+name: Test
+main: dev.elitegame.egdmc.Main
+version: 0.1
+commands:
+    help:
+        description: Testing
