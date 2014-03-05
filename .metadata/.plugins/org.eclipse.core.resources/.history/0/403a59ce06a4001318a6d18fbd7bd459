@@ -30,7 +30,7 @@ public class Main extends JavaPlugin implements Listener {
 		saveConfig();
 		// "/command: Description"
 		help.add("/help: Displays this message");
-		help.add("/sversion: Tells the version of the server");
+		help.add("/spawn: Teleport to spawn");
 		getConfig().set("help", help);
 		saveConfig();
 		getLogger().info("The plugin has started!");
@@ -70,7 +70,7 @@ public class Main extends JavaPlugin implements Listener {
 		if (sender instanceof Player) {
 			if (label.equalsIgnoreCase("help")) {
 				sendHelp(player);
-			} else if (label.equalsIgnoreCase("sversion")) {
+			} else if (label.equalsIgnoreCase("version")) {
 				PluginDescriptionFile pdfFile = this.getDescription();
 				String version = pdfFile.getVersion();
 				player.sendMessage(ChatColor.RED + "This server is currently at v" + version + "!");
@@ -84,7 +84,7 @@ public class Main extends JavaPlugin implements Listener {
 	public void sendHelp(Player plr) {
 		List<String> help = getConfig().getStringList("help");
 		for (String s : help) {
-			plr.sendMessage(ChatColor.GRAY + s);
+			plr.sendMessage(s);
 		}
 	}
 

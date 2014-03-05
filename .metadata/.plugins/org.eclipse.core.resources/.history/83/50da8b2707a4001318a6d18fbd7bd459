@@ -30,7 +30,7 @@ public class Main extends JavaPlugin implements Listener {
 		saveConfig();
 		// "/command: Description"
 		help.add("/help: Displays this message");
-		help.add("/sversion: Tells the version of the server");
+		help.add("/version: Tells the version of the server");
 		getConfig().set("help", help);
 		saveConfig();
 		getLogger().info("The plugin has started!");

@@ -1,0 +1,8 @@
+name: EGDMC Main
+version: BETA 0.1
+main: dev.elitegame.egdmc.Main
+commands:
+    help:
+        description: Displays help
+    version:
+        description: Displays version
