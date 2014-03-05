@@ -1,5 +1,5 @@
 name: EGDMC-Main
-version: BETA 0.3
+version: BETA 0.2
 main: dev.elitegame.egdmc.Main
 commands:
     help:
