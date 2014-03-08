@@ -13,8 +13,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerToggleFlightEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 public class Main extends JavaPlugin implements Listener {
 
@@ -85,7 +87,7 @@ public class Main extends JavaPlugin implements Listener {
 					} else if (args.length == 2) {
 						if (args[0].equalsIgnoreCase("time")) {
 							if (args[1].isEmpty()) {
-								player.sendMessage("You must enter a time! (day, night)");
+								player.sendMessage("You must enter a time! (day, night, mid)");
 							} else {
 								if (args[1].equalsIgnoreCase("day")) {
 									List<World> worlds = getServer().getWorlds();
@@ -99,6 +101,12 @@ public class Main extends JavaPlugin implements Listener {
 									for (World w : worlds) {
 										w.setTime(night);
 									}
+								} else if (args[1].equalsIgnoreCase("mid")) {
+									List<World> worlds = getServer().getWorlds();
+									long mid = 6250;
+									for (World w : worlds) {
+										w.setTime(mid);
+									}
 								}
 								
 							}
@@ -107,6 +115,14 @@ public class Main extends JavaPlugin implements Listener {
 				} else {
 					player.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 				}
+			} else if (label.equalsIgnoreCase("stop")) {
+				getServer().broadcastMessage(ChatColor.RED + "The server is going to shut down in 10 seconds.");
+				new BukkitRunnable() {
+		            @Override
+		            public void run() {
+		                getServer().shutdown();
+		            }
+		        }.runTaskLater(this, 100);
 			}
 		} else {
 			sender.sendMessage("You must be a player to use this command!");
