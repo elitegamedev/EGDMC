@@ -1,5 +1,5 @@
 name: EGDMC-Main
-version: BETA 0.4
+version: BETA 0.3
 main: dev.elitegame.egdmc.Main
 commands:
     help:
@@ -10,5 +10,3 @@ commands:
         description: Displays version
     admin:
         description: WIP!
-    stop:
-        description: Stops the server
