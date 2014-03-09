@@ -108,6 +108,7 @@ public class Main extends JavaPlugin implements Listener {
 										w.setTime(mid);
 									}
 								}
+								
 							}
 						}
 					}
@@ -119,20 +120,6 @@ public class Main extends JavaPlugin implements Listener {
 				player.sendMessage(ChatColor.RED + "Kicking all players...");
 				for (Player p : players) {
 					p.kickPlayer(ChatColor.BLUE + "An Admin just kicked everyone off the server!");
-				}
-			} else if (label.equalsIgnoreCase("pickup")) {
-				if (args.length == 0) {
-					player.sendMessage(ChatColor.RED + "Usage: /pickup on/off");
-				} else if (args.length == 1) {
-					if (args[0].equalsIgnoreCase("on")) {
-						player.setCanPickupItems(true);
-						player.sendMessage(ChatColor.GREEN + "Pickups Enabled!");
-					} else if (args[0].equalsIgnoreCase("off")) {
-						player.setCanPickupItems(false);
-						player.sendMessage(ChatColor.GREEN + "Pickups Disabled!");
-					} else {
-						player.sendMessage(ChatColor.RED + "Usage: /pickup on/off");
-					}
 				}
 			}
 		} else {

@@ -10,7 +10,5 @@ commands:
         description: Displays version
     admin:
         description: WIP!
-    kickall:
-        description: Kicks everyone
-    pickup:
-        description: Toggles Pickups
+    cstop:
+        description: Stops the server

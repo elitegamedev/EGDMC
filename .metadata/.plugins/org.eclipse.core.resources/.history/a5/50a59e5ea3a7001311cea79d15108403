@@ -108,32 +108,21 @@ public class Main extends JavaPlugin implements Listener {
 										w.setTime(mid);
 									}
 								}
+								
 							}
 						}
 					}
 				} else {
 					player.sendMessage(ChatColor.RED + "You do not have permission to use this command!");
 				}
-			} else if (label.equalsIgnoreCase("kickall")) {
-				Player[] players = getServer().getOnlinePlayers();
-				player.sendMessage(ChatColor.RED + "Kicking all players...");
-				for (Player p : players) {
-					p.kickPlayer(ChatColor.BLUE + "An Admin just kicked everyone off the server!");
-				}
-			} else if (label.equalsIgnoreCase("pickup")) {
-				if (args.length == 0) {
-					player.sendMessage(ChatColor.RED + "Usage: /pickup on/off");
-				} else if (args.length == 1) {
-					if (args[0].equalsIgnoreCase("on")) {
-						player.setCanPickupItems(true);
-						player.sendMessage(ChatColor.GREEN + "Pickups Enabled!");
-					} else if (args[0].equalsIgnoreCase("off")) {
-						player.setCanPickupItems(false);
-						player.sendMessage(ChatColor.GREEN + "Pickups Disabled!");
-					} else {
-						player.sendMessage(ChatColor.RED + "Usage: /pickup on/off");
-					}
-				}
+			} else if (label.equalsIgnoreCase("cstop")) {
+				getServer().broadcastMessage(ChatColor.RED + "The server is going to shut down in 10 seconds.");
+				new BukkitRunnable() {
+		            @Override
+		            public void run() {
+		                getServer().shutdown();
+		            }
+		        }.runTaskLater(this, 100);
 			}
 		} else {
 			sender.sendMessage("You must be a player to use this command!");
